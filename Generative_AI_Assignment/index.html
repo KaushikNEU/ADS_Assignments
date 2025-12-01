@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generative AI Text Playground</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      max-width: 900px;
+      width: 100%;
+      padding: 24px 16px 40px;
+    }
+
+    h1, h2, h3 {
+      color: #f9fafb;
+      margin-top: 0;
+    }
+
+    h1 span {
+      color: #38bdf8;
+    }
+
+    .card {
+      background: #020617;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #1f2937;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      color: #9ca3af;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      resize: vertical;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      padding: 10px 12px;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.95rem;
+    }
+
+    textarea:focus,
+    input:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px #38bdf8;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .control-group {
+      font-size: 0.9rem;
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    input[type="number"] {
+      width: 80px;
+      border-radius: 6px;
+      border: 1px solid #4b5563;
+      padding: 4px 6px;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+    }
+
+    .btn-row {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.05s ease, box-shadow 0.05s ease, background 0.15s ease;
+    }
+
+    button.primary {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #0b1120;
+      box-shadow: 0 8px 20px rgba(56,189,248,0.3);
+    }
+
+    button.secondary {
+      background: #111827;
+      color: #e5e7eb;
+      border: 1px solid #4b5563;
+    }
+
+    button:active {
+      transform: translateY(1px);
+      box-shadow: none;
+    }
+
+    button[disabled] {
+      opacity: 0.6;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .output-container {
+      min-height: 120px;
+      background: #020617;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .output-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .muted {
+      color: #9ca3af;
+      font-size: 0.88rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: #111827;
+      border: 1px solid #1f2937;
+      color: #e5e7eb;
+    }
+
+    .pill {
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      border: 1px solid #4b5563;
+      color: #9ca3af;
+    }
+
+    .settings-summary {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .settings-summary span {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .explain-list {
+      font-size: 0.88rem;
+      color: #d1d5db;
+      padding-left: 18px;
+      margin: 6px 0 0;
+    }
+
+    .explain-list li {
+      margin-bottom: 4px;
+    }
+
+    .code-block {
+      background: #020617;
+      border-radius: 8px;
+      border: 1px solid #1f2937;
+      padding: 10px 12px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 16px 10px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Intro card -->
+    <div class="card">
+      <div class="badge">
+        <span>🧠 Crash Course in Generative AI</span>
+        <span class="pill">Text Generation Demo</span>
+      </div>
+      <h1><span>Generative AI</span> Text Playground</h1>
+      <p class="subtitle">
+        This interactive page demonstrates a simplified version of a Transformer-based language model (like GPT-2).
+        Enter a prompt, adjust the generation settings, and see how the output changes.
+      </p>
+    </div>
+
+    <!-- Main interaction card -->
+    <div class="card">
+      <h2>Try it out</h2>
+      <p class="muted">
+        In a real system, this form would call a backend model (e.g., GPT-2 in Python) with your settings.
+        Here we simulate that behaviour in JavaScript to illustrate the core idea of text generation.
+      </p>
+
+      <form id="generator-form">
+        <label for="prompt-input">Prompt</label>
+        <textarea id="prompt-input" placeholder="Example: The future of artificial intelligence is"></textarea>
+
+        <div class="controls">
+          <div class="control-group">
+            <label for="temperature-range">Temperature</label>
+            <div class="control-row">
+              <input type="range" id="temperature-range" min="0.1" max="1.5" step="0.1" value="0.8" />
+              <span id="temperature-value">0.8</span>
+            </div>
+            <p class="muted">
+              Low (0.1) = safer &amp; more predictable. High (&gt;1.0) = more random, creative, and risky.
+            </p>
+          </div>
+
+          <div class="control-group">
+            <label for="max-tokens-input">Max tokens</label>
+            <div class="control-row">
+              <input type="range" id="max-tokens-input" min="20" max="120" step="10" value="60" />
+              <span id="max-tokens-value">60</span>
+            </div>
+            <p class="muted">
+              Roughly controls how long the continuation can be.
+            </p>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="primary" id="generate-btn">
+            <span>⚡ Generate text</span>
+          </button>
+          <button type="button" class="secondary" id="clear-btn">
+            🧹 Clear
+          </button>
+        </div>
+
+        <p class="settings-summary">
+          Current settings:
+          <span id="settings-summary-text">temperature = 0.8 • max tokens = 60</span>
+        </p>
+      </form>
+
+      <div style="margin-top: 18px;">
+        <div class="output-label">Generated completion</div>
+        <div class="output-container" id="output-container">
+          <span class="muted">Your AI-generated text will appear here.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explanation card -->
+    <div class="card">
+      <h3>What is this demonstrating?</h3>
+      <ul class="explain-list">
+        <li><strong>Prompt-based generation</strong> – the model completes your input text token by token.</li>
+        <li><strong>Temperature</strong> – reshapes the probability distribution over the next token.</li>
+        <li><strong>Max tokens</strong> – controls how far the model continues before stopping.</li>
+      </ul>
+      <p class="muted" style="margin-top: 10px;">
+        In your Jupyter Notebook, you used a real GPT-2 model in Python. This webpage mirrors the same
+        concepts in the browser and could call your Python backend via <code>fetch('/generate')</code>.
+      </p>
+    </div>
+
+    <!-- Code snippet card for documentation -->
+    <div class="card">
+      <h3>Original AI-generated core function (simplified)</h3>
+      <p class="muted">
+        This is a stripped-down version of the text generation function that an AI coding assistant (e.g.,
+        ChatGPT with Code Interpreter) could produce. I then extended and documented it.
+      </p>
+      <div class="code-block">
+function fakeGenerate(prompt) {
+  const completions = [
+    "…will transform how we work, learn, and create new ideas.",
+    "…shaped by collaboration between humans and machines.",
+    "…full of systems that assist rather than replace people."
+  ];
+  if (!prompt || prompt.trim() === "") {
+    prompt = "The future of artificial intelligence is";
+  }
+  const idx = Math.floor(Math.random() * completions.length);
+  return prompt.trim() + " " + completions[idx];
+}
+      </div>
+      <p class="muted" style="margin-top: 8px;">
+        In the final version below, I added support for temperature, max tokens, UI feedback,
+        and a clearer explanation of the generative AI concept.
+      </p>
+    </div>
+
+    <div class="footer-note">
+      Built as part of the “Crash Course in Generative AI” assignment — Step 2: Dynamic Webpage Demo.
+    </div>
+  </div>
+
+  <script>
+    // === UI wiring ===
+    const tempRange = document.getElementById("temperature-range");
+    const tempValue = document.getElementById("temperature-value");
+    const maxTokensRange = document.getElementById("max-tokens-input");
+    const maxTokensValue = document.getElementById("max-tokens-value");
+    const settingsSummary = document.getElementById("settings-summary-text");
+
+    const form = document.getElementById("generator-form");
+    const promptInput = document.getElementById("prompt-input");
+    const outputContainer = document.getElementById("output-container");
+    const generateBtn = document.getElementById("generate-btn");
+    const clearBtn = document.getElementById("clear-btn");
+
+    function updateSettingsSummary() {
+      settingsSummary.textContent = `temperature = ${tempRange.value} • max tokens = ${maxTokensRange.value}`;
+    }
+
+    tempRange.addEventListener("input", () => {
+      tempValue.textContent = tempRange.value;
+      updateSettingsSummary();
+    });
+
+    maxTokensRange.addEventListener("input", () => {
+      maxTokensValue.textContent = maxTokensRange.value;
+      updateSettingsSummary();
+    });
+
+    clearBtn.addEventListener("click", () => {
+      promptInput.value = "";
+      outputContainer.innerHTML = '<span class="muted">Your AI-generated text will appear here.</span>';
+    });
+
+    // === SIMPLE GENERATIVE AI SIMULATION ===
+    // NOTE:
+    // In a real implementation, this function would send the prompt + settings to a backend
+    // (e.g., a Flask or FastAPI app that wraps your GPT-2 model from the Jupyter Notebook).
+    // For this assignment, we simulate generation in the browser to keep everything self-contained.
+
+    function fakeGenerateWithSettings(prompt, temperature, maxTokens) {
+      // Fallback prompt if user leaves it empty
+      const basePrompt =
+        prompt && prompt.trim().length > 0
+          ? prompt.trim()
+          : "The future of artificial intelligence is";
+
+      const continuationsLowTemp = [
+        " predictable, safe, and focused on assisting humans in everyday tasks.",
+        " carefully regulated, with transparent systems that explain their decisions.",
+        " integrated into critical infrastructure with strong safeguards and audits."
+      ];
+
+      const continuationsMediumTemp = [
+        " a collaboration between human creativity and machine-scale pattern recognition.",
+        " defined by tools that help us write, code, and explore complex ideas faster.",
+        " shaped by global conversations about ethics, policy, and innovation."
+      ];
+
+      const continuationsHighTemp = [
+        " a strange mix of art, science, chaos, and unexpected discoveries.",
+        " something we cannot fully predict, full of surprising new applications.",
+        " a landscape where entirely new jobs, cultures, and narratives emerge."
+      ];
+
+      let pool;
+      if (temperature <= 0.4) {
+        pool = continuationsLowTemp;
+      } else if (temperature <= 1.0) {
+        pool = continuationsMediumTemp;
+      } else {
+        pool = continuationsHighTemp;
+      }
+
+      const idx = Math.floor(Math.random() * pool.length);
+      const continuation = pool[idx];
+
+      // Simulate max token effect by truncating the continuation text
+      const approxChars = Math.max(20, Math.min(220, maxTokens * 2));
+      const truncated = continuation.slice(0, approxChars);
+
+      return basePrompt + truncated;
+    }
+
+    // Optional "typing" animation for nicer UX
+    function typeOutText(text, container, speed = 15) {
+      container.textContent = "";
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i >= text.length) {
+          clearInterval(interval);
+          return;
+        }
+        container.textContent += text[i];
+        i++;
+      }, speed);
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const prompt = promptInput.value;
+      const temperature = parseFloat(tempRange.value);
+      const maxTokens = parseInt(maxTokensRange.value, 10);
+
+      // Show loading state
+      generateBtn.disabled = true;
+      generateBtn.textContent = "Generating…";
+
+      // In a real app, you might call `fetch('/generate', { method: 'POST', body: JSON.stringify({...}) })`
+      // and await a response. Here we simulate latency + generation.
+      setTimeout(() => {
+        const generated = fakeGenerateWithSettings(prompt, temperature, maxTokens);
+        typeOutText(generated, outputContainer, 12);
+
+        generateBtn.disabled = false;
+        generateBtn.textContent = "⚡ Generate text";
+      }, 500);
+    });
+
+    // Initialize summary on load
+    updateSettingsSummary();
+  </script>
+</body>
+</html>
