@@ -2,6 +2,32 @@
 
 _A hands-on teaching module for INFO 7390 – Advanced Data Science & Architecture_
 
+
+🎥 Project Demo & Explanation Videos
+------------------------------------
+
+The following videos demonstrate the Retrieval-Augmented Generation (RAG) system from multiple perspectives, including a full walkthrough, a conceptual storytelling explanation, and a short-form AI-generated explainer.
+
+### 📺 Screen Recording — Full System Walkthrough (VEED)
+
+A detailed screen recording that walks through the notebook implementation, explaining each stage of the RAG pipeline, including document ingestion, chunking, embedding, retrieval, and grounded generation.
+
+*   **YouTube:**👉 [Watch the full walkthrough](https://youtu.be/MjZJ504GH30)
+    
+
+### 📖 Story-Style Concept Explanation — RAG using NotebookLLM
+
+A narrative, story-driven explanation of Retrieval-Augmented Generation designed to build intuition around how retrieval and generation work together.
+
+*   **YouTube:**👉 [Watch the RAG story explanation](https://youtu.be/dxeSDckNEsE)
+    
+
+### ⚡ Short-Form AI-Generated Explainer — QuickFrame AI (15 seconds)
+
+A concise, visually driven explainer video generated using QuickFrame AI that summarizes the core idea of RAG in a short, engaging format.
+
+*   **QuickFrame Preview:**👉 [View the 15-second AI-generated video](https://ai.quickframe.com/preview/55d8c6bb-0820-43ba-81be-2c40533e2c13)
+
 ## 🎯 Overview
 
 This repository is an **end-to-end educational package** designed to teach students the full workflow of **Retrieval-Augmented Generation (RAG)** — one of the most important design patterns in modern AI systems.
