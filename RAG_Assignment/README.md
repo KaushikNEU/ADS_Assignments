@@ -181,8 +181,64 @@ Students can take this further by:
 
 AI tools were used for drafting, design assistance, and code debugging.All core implementation, structuring, and conceptual explanation were performed manually and are fully understood by the author.
 
+
+📘 Academic Integrity & Use of AI Tools
+---------------------------------------
+
+This project was completed in accordance with the academic integrity guidelines of INFO 7390: Advanced Data Science and Architecture.
+
+### Use of AI Assistance
+
+AI tools (including large language models and generative media platforms) were used in this project in a **supportive and assistive capacity**, not as a substitute for original thought or understanding. Specifically, AI was used for:
+
+*   Code debugging and refactoring assistance
+    
+*   Generating synthetic examples and edge-case scenarios
+    
+*   Drafting and refining explanatory text and documentation
+    
+*   Creating visual assets and short-form explainer videos
+    
+*   Improving clarity, structure, and presentation of written materials
+    
+
+All architectural decisions, system design choices, and instructional structure were conceived, implemented, and validated by the author.
+
+### Original Work and Understanding
+
+The core contributions of this project—including:
+
+*   Selection of the Retrieval-Augmented Generation (RAG) concept
+    
+*   Design of the end-to-end RAG pipeline
+    
+*   Implementation of document ingestion, chunking, embedding, retrieval, and generation
+    
+*   Development of exercises, visualizations, and debugging workflows
+    
+*   Pedagogical framing and instructional narrative
+    
+
+represent original work. The author fully understands and can explain every component of the system, as demonstrated through the implementation, documentation, and accompanying video walkthroughs.
+
+### AI-Generated Media
+
+Some explanatory videos were generated using AI-based video tools for educational and illustrative purposes. These videos complement, but do not replace, the author’s own technical walkthroughs and conceptual explanations.
+
+### Compliance Statement
+
+This project adheres to the course policy permitting AI tools for:
+
+*   Assistance with coding and debugging
+    
+*   Content generation for explanatory or illustrative purposes
+    
+*   Proofreading and formatting support
+    
+
+while maintaining full accountability for correctness, originality, and conceptual understanding.
+
 ## 🏁 Conclusion
 
 This repository serves as a **self-contained RAG learning environment**, built for both beginners and advanced students. It blends theory, implementation, visualization, and experimentation into a cohesive teaching experience.
 
-It not only meets but exceeds the technical requirements of the INFO 7390 Take-Home Final.
