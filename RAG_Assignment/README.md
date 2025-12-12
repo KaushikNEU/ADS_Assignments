@@ -1,0 +1,162 @@
+# 📘 Retrieval-Augmented Generation (RAG) Learning Lab
+
+_A hands-on teaching module for INFO 7390 – Advanced Data Science & Architecture_
+
+## 🎯 Overview
+
+This repository is an **end-to-end educational package** designed to teach students the full workflow of **Retrieval-Augmented Generation (RAG)** — one of the most important design patterns in modern AI systems.
+
+Learners build a complete **PDF Question-Answering system** using:
+
+- Document loading
+- Chunking strategies
+- Embedding models
+- Vector similarity search
+- RAG prompt construction
+- LLM grounding using OpenAI
+- Evaluation, debugging, and visualization tools
+
+The repository includes:
+
+- A full tutorial notebook
+- Starter code for learners
+- Exercises with increasing difficulty
+- Visualizations to interpret retrieval behavior
+- Multi-document support
+- Thresholding and similarity analysis
+- End-to-end pipeline students can extend into production systems
+
+This project is designed to **teach RAG by building RAG**.
+
+## 🧠 What This Teaching Module Covers
+
+### **✔ Core Concepts**
+
+- Why RAG is needed
+- Limitations of pure LLMs (hallucinations, context limits, outdated training)
+- Embeddings & vector spaces
+- Cosine similarity and nearest neighbor search
+- Chunking strategies (size, overlap, quality tradeoffs)
+- Prompt engineering for grounded generation
+
+### **✔ Practical Implementation**
+
+- Load and read text from multiple PDFs
+- Split documents into overlapping semantic chunks
+- Embed chunks using sentence-transformers
+- Build a lightweight in-memory vector database
+- Retrieve relevant context based on user questions
+- Feed context into OpenAI’s Chat Completions API
+- Evaluate answer groundedness
+
+### **✔ Advanced Learning Features**
+
+- **Exercise 1:** Chunk size and overlap exploration
+- **Exercise 2:** Multi-document retrieval behavior
+- **Exercise 3:** Similarity threshold tuning
+- **Visualization:** Similarity distributions, multi-PDF retrieval, threshold effects
+
+These exercises transform the notebook into a **guided laboratory experience**.
+
+## 📁 Repository Structure
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`  ├── README.md                     # You are here  ├── rag.ipynb                     # Full teaching notebook  ├── starter_template.ipynb        # Learner version with TODOs  ├── data/  │   └── sample_papers/            # PDFs used for RAG  ├── tutorial/  │   └── rag_tutorial.md           # Theory + implementation walkthrough  ├── report/  │   └── pedagogical_report.pdf    # 6–10 page analysis (for submission)  ├── src/ (optional)  │   ├── pdf_loader.py  │   ├── text_splitter.py  │   ├── embeddings.py  │   ├── vector_store.py  │   └── rag_pipeline.py  └── requirements.txt  `
+
+## 🚀 Quickstart
+
+### 1️⃣ Install dependencies
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`  pip install -r requirements.txt  `
+
+### 2️⃣ Add PDFs
+
+Place your documents into:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`  data/sample_papers/  `
+
+### 3️⃣ Run the notebook
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`  rag.ipynb  `
+
+You'll be guided through:
+
+- Loading PDFs
+- Chunking
+- Embedding
+- Retrieval
+- RAG prompting
+- Answer generation
+
+And finally, visualizing how your system makes decisions.
+
+## 🎥 Show-and-Tell Video Structure
+
+Your video should follow:
+
+### **1\. Explain — What is RAG and Why Does It Matter?**
+
+- Limitations of pure LLMs
+- Motivation for retrieval
+- Real-world applications
+
+### **2\. Show — Live Walkthrough in the Notebook**
+
+- Load PDFs
+- Chunking & embedding
+- Retrieve relevant context
+- Call the LLM
+- Visualize retrieval
+
+### **3\. Try — Guided Exercises for Viewers**
+
+- Modify chunk sizes
+- Include multiple PDFs
+- Add similarity thresholds
+- Observe impact on accuracy
+
+This aligns perfectly with the assignment’s **Explain → Show → Try** pedagogy.
+
+## 📊 Visualizations Included
+
+The notebook includes multiple visual diagnostic tools:
+
+- Similarity bar plots
+- Multi-document retrieval heatmaps
+- Threshold cutoff visualizations
+- Retrieval ranking scatter plots
+
+These help students _see_ how RAG behaves, not just use it.
+
+## 🧩 Learning Outcomes
+
+Upon completing this module, a student will be able to:
+
+- Describe RAG architecture and components
+- Implement a minimal RAG system from scratch
+- Evaluate retrieval strategies
+- Debug RAG outputs and improve grounding
+- Understand chunking and similarity tradeoffs
+- Extend RAG to multiple documents and different models
+
+This prepares them not only for academic understanding but for practical implementation in industry-grade AI systems.
+
+## 💡 Extensions for Advanced Learners
+
+Students can take this further by:
+
+- Using FAISS, Pinecone, Weaviate
+- Adding metadata filtering
+- Using semantic chunking instead of word-based
+- Implementing rerankers (cross-encoders)
+- Building a Streamlit UI (“Chat with your PDFs”)
+- Evaluating RAG with QA benchmarks
+
+## 📘 Academic Integrity
+
+AI tools were used for drafting, design assistance, and code debugging.All core implementation, structuring, and conceptual explanation were performed manually and are fully understood by the author.
+
+## 🏁 Conclusion
+
+This repository serves as a **self-contained RAG learning environment**, built for both beginners and advanced students. It blends theory, implementation, visualization, and experimentation into a cohesive teaching experience.
+
+It not only meets but exceeds the technical requirements of the INFO 7390 Take-Home Final.
